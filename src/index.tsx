@@ -1,7 +1,17 @@
+import { ThemeProvider } from "@emotion/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { App } from "./App";
+import { defaultTheme } from "./common/theme/defaultTheme";
+import { AppTheme } from "./common/theme/types/AppTheme";
 import { StoreProvider, store } from "./redux";
+import { globalStyle } from "./style/global.styled";
+
+declare module "@mui/material/styles" {
+  export interface Theme extends AppTheme {}
+  // allow configuration using `createTheme`
+  export interface ThemeOptions extends AppTheme {}
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -9,8 +19,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <StoreProvider store={store}>
-      <App />
-    </StoreProvider>
+    <ThemeProvider theme={defaultTheme}>
+      {globalStyle}
+      <StoreProvider store={store}>
+        <App />
+      </StoreProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );

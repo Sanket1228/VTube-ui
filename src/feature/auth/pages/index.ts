@@ -1,1 +1,2 @@
-export * from "./LoginPage";
+export * from "./AuthLayoutPage/AuthLayoutPage";
+export * from "./LoginPage/LoginPage";

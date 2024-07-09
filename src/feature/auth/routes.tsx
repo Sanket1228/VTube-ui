@@ -1,11 +1,21 @@
 import { FeatureRouteObject } from "../../common/types/FeatureRouteObject";
-import { LoginPage } from "./pages";
+import { AuthLayoutPage, LoginPage } from "./pages";
 
 const routes: FeatureRouteObject[] = [
   {
     type: "public",
     path: "/auth",
-    element: <LoginPage />,
+    element: <AuthLayoutPage />,
+    children: [
+      {
+        index: true,
+        element: <LoginPage />,
+      },
+      {
+        path: "/auth/login",
+        element: <LoginPage />,
+      },
+    ],
   },
 ];
 
