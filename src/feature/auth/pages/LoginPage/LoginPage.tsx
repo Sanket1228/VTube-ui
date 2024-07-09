@@ -1,19 +1,19 @@
-import { Copyright, LockOutlined } from "@mui/icons-material";
+import { LockOutlined } from "@mui/icons-material";
 import {
   Avatar,
   Box,
   Button,
-  Checkbox,
   Container,
-  CssBaseline,
-  FormControlLabel,
   Grid,
   Link,
   TextField,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -23,12 +23,21 @@ export const LoginPage = () => {
     });
   };
 
+  const handleSignUpClick = () => navigate("/auth/signup");
+
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Container
+      component="main"
+      maxWidth="xs"
+      style={{
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Box
         sx={{
-          marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -37,78 +46,87 @@ export const LoginPage = () => {
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlined />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
+        <Typography
+          component="h1"
+          variant="h5"
+          sx={{ color: (theme) => theme.app.text }}
+        >
+          Sign in
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="given-name"
-                name="firstName"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="family-name"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
-          </Grid>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            variant="filled"
+            InputLabelProps={{
+              sx: {
+                color: (theme) => theme.app.text,
+              },
+            }}
+            InputProps={{
+              sx: {
+                color: (theme) => theme.app.text,
+              },
+            }}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            variant="filled"
+            InputLabelProps={{
+              sx: {
+                color: (theme) => theme.app.text,
+              },
+            }}
+            InputProps={{
+              sx: {
+                color: (theme) => theme.app.text,
+              },
+            }}
+          />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign Up
+            Sign In
           </Button>
-          <Grid container justifyContent="flex-end">
+          <Grid container>
+            <Grid item xs>
+              <Link
+                href="#"
+                variant="body2"
+                sx={{ color: (theme) => theme.app.text }}
+              >
+                Forgot password?
+              </Link>
+            </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
+              <Link
+                href="#"
+                onClick={handleSignUpClick}
+                variant="body2"
+                sx={{ color: (theme) => theme.app.text }}
+              >
+                {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
     </Container>
   );
 };

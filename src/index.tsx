@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@emotion/react";
+import { CssBaseline } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { App } from "./App";
@@ -21,6 +22,7 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={defaultTheme}>
       {globalStyle}
+      <CssBaseline />
       <StoreProvider store={store}>
         <App />
       </StoreProvider>

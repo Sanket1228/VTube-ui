@@ -1,5 +1,5 @@
 import { FeatureRouteObject } from "../../common/types/FeatureRouteObject";
-import { AuthLayoutPage, LoginPage } from "./pages";
+import { AuthLayoutPage, LoginPage, SignUpPage } from "./pages";
 
 const routes: FeatureRouteObject[] = [
   {
@@ -14,6 +14,10 @@ const routes: FeatureRouteObject[] = [
       {
         path: "/auth/login",
         element: <LoginPage />,
+      },
+      {
+        path: "/auth/signup",
+        element: <SignUpPage />,
       },
     ],
   },

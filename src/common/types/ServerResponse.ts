@@ -1,3 +1,3 @@
 export interface IServerResponse<T> {
-  data?: T;
+  data: T;
 }
