@@ -1,8 +1,8 @@
 import { Reducer } from "@reduxjs/toolkit";
 import { FeatureRouteObject } from "./FeatureRouteObject";
 
-export interface IFeatureApp {
+export interface IFeatureApp<IFeatureAppState> {
   appName: string;
-  reducer: Reducer;
+  reducer: Reducer<IFeatureAppState>;
   getRoutes: () => FeatureRouteObject[];
 }

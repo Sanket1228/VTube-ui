@@ -8,6 +8,10 @@ import { AppTheme } from "./common/theme/types/AppTheme";
 import { StoreProvider, store } from "./redux";
 import { globalStyle } from "./style/global.styled";
 
+// dotenv.config({
+//   path: "./.env",
+// });
+
 declare module "@mui/material/styles" {
   export interface Theme extends AppTheme {}
   // allow configuration using `createTheme`
@@ -15,7 +19,8 @@ declare module "@mui/material/styles" {
 }
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  // document.getElementById("root") as HTMLElement
+  document.querySelector("#root") as HTMLElement
 );
 
 root.render(

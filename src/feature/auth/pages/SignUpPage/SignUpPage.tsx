@@ -9,25 +9,45 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signUp } from "../../redux/action/signUpAction";
+import { RootState } from "../../../../redux";
+import { signUp } from "../../redux/action/authAction";
 import { AuthDispatch } from "../../redux/types/AuthDispatch";
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AuthDispatch>();
 
+  const signUpApiResponse = useSelector(
+    (state: RootState) => state.auth.signUp?.api?.apiState
+  );
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    const email = data.get("email");
-    const password = data.get("password");
+    const fullname = data.get("fullname")?.toString();
+    const username = data.get("username")?.toString();
+    const email = data.get("email")?.toString();
+    const password = data.get("password")?.toString();
 
-    // TODO: work on passing payload to api
-    dispatch(signUp());
+    dispatch(
+      signUp({
+        fullname: fullname,
+        username: username,
+        email: email,
+        password: password,
+      })
+    );
   };
+
+  useEffect(() => {
+    if (signUpApiResponse === "loaded") {
+      navigate("/auth/login");
+    }
+  }, [signUpApiResponse]);
 
   const handleSignInClick = () => navigate("/auth/login");
 
@@ -65,7 +85,7 @@ export const SignUpPage = () => {
             <Grid item xs={12}>
               <TextField
                 autoComplete="full-name"
-                name="fullName"
+                name="fullname"
                 required
                 fullWidth
                 id="fullName"

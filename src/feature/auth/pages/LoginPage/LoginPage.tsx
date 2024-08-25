@@ -9,18 +9,36 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "../../../../redux";
+import { login } from "../../redux/action/authAction";
+import { AuthDispatch } from "../../redux/types/AuthDispatch";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
 
+  const dispatch = useDispatch<AuthDispatch>();
+
+  // auth - login - api - data - acccess
+  const userData = useSelector((state: RootState) => state.auth.login.api.data);
+
+  useEffect(() => {
+    console.log("inside use effect", userData?.accessToken);
+    if (userData?.accessToken !== undefined) {
+      navigate("/");
+    }
+  }, [userData]);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const email = data.get("email")?.toString();
+    const password = data.get("password")?.toString();
+
+    dispatch(login({ email: email, password: password }));
   };
 
   const handleSignUpClick = () => navigate("/auth/signup");

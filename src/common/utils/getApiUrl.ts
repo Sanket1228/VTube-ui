@@ -1,1 +1,3 @@
-export const getLocalUrl = () => process.env.LOCAL_URL;
+export const getLocalUrl = () => {
+  return process.env.LOCAL_URL;
+};

@@ -1,6 +1,7 @@
+import { LoginState } from "./LoginState";
 import { SignUpState } from "./SignUpState";
 
 export type AuthState = {
-  login: any;
+  login: LoginState;
   signUp: SignUpState;
 };

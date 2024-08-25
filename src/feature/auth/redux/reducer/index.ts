@@ -8,4 +8,4 @@ export const authReducerMap: ReducersMapObject<AuthState> = {
   signUp: signUpReducer,
 };
 
-export const authReducer: Reducer = combineSlices(authReducerMap);
+export const authReducer: Reducer<AuthState> = combineSlices(authReducerMap);
