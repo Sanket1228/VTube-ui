@@ -5,6 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import * as React from "react";
+import { Outlet } from "react-router-dom";
 import { Footer } from "../components/Footer/Footer";
 import { Header } from "../components/Header/Header";
 import { Sidebar } from "../components/Sidebar/Sidebar";
@@ -37,6 +38,17 @@ export const LandingPage = () => {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Outlet />
+          </Container>
+          <Container
+            style={{
+              position: "fixed",
+              bottom: 0,
+              width: "100%",
+              height: 60,
+              textAlign: "center",
+            }}
+          >
             <Grid container spacing={3}></Grid>
             <Footer sx={{ pt: 4 }} />
           </Container>

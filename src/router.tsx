@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { authFeatureApp } from "./feature/auth/authFeatureApp";
-import { LandingPage } from "./feature/landing";
+import { HomePage, LandingPage, UploaderPage } from "./feature/landing";
 
 export const getAppRouter = () => {
   const authRoutes = authFeatureApp.getRoutes();
@@ -9,6 +9,20 @@ export const getAppRouter = () => {
     {
       path: "/",
       element: <LandingPage />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />,
+        },
+        {
+          path: "/home",
+          element: <HomePage />,
+        },
+        {
+          path: "/upload",
+          element: <UploaderPage />,
+        },
+      ],
     },
   ]);
 };
