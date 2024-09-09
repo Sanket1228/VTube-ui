@@ -25,7 +25,6 @@ export const LoginPage = () => {
   const userData = useSelector((state: RootState) => state.auth.login.api.data);
 
   useEffect(() => {
-    console.log("inside use effect", userData?.accessToken);
     if (userData?.accessToken !== undefined) {
       navigate("/");
     }

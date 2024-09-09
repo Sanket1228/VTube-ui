@@ -22,6 +22,7 @@ export const loginSlice = createSlice({
       state.api.apiState = "loaded";
       state.api.data = action.payload;
       state.api.error = undefined;
+      localStorage.setItem("token", action.payload.accessToken);
     },
     loginFailed(state, action: PayloadAction<string>) {
       state.api.apiState = "error";
