@@ -1,11 +1,20 @@
-import { LockOutlined } from "@mui/icons-material";
 import {
+  AccountCircle,
+  Email,
+  Lock,
+  LockOutlined,
+  Person,
+} from "@mui/icons-material";
+import {
+  Alert,
   Avatar,
   Box,
   Button,
-  Container,
+  CircularProgress,
   Grid,
+  InputAdornment,
   Link,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -22,6 +31,10 @@ export const SignUpPage = () => {
 
   const signUpApiResponse = useSelector(
     (state: RootState) => state.auth.signUp?.api?.apiState
+  );
+
+  const signUpError = useSelector(
+    (state: RootState) => state.auth.signUp.api.error
   );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -52,19 +65,18 @@ export const SignUpPage = () => {
   const handleSignInClick = () => navigate("/auth/login");
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      style={{
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+    <Paper
+      elevation={6}
+      sx={{
+        padding: 4,
+        borderRadius: 4,
+        backgroundColor: "rgba(255, 255, 255, 0.05)",
+        backdropFilter: "blur(12px)",
+        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
       }}
     >
       <Box
         sx={{
-          marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -76,30 +88,46 @@ export const SignUpPage = () => {
         <Typography
           component="h1"
           variant="h5"
-          sx={{ color: (theme) => theme.app.text }}
+          sx={{ color: (theme) => theme.app?.text ?? "#fff" }}
         >
           Sign up
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          {signUpError && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {signUpError}
+            </Alert>
+          )}
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 autoComplete="full-name"
-                name="fullname"
+                placeholder="Enter fullname"
                 required
                 fullWidth
                 id="fullName"
-                label="Full Name"
                 autoFocus
-                variant="filled"
-                InputLabelProps={{
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Person
+                        sx={{ color: (theme) => theme.app?.text ?? "#fff" }}
+                      />
+                    </InputAdornment>
+                  ),
                   sx: {
-                    color: (theme) => theme.app.text,
+                    backgroundColor: "rgba(255,255,255,0.05)",
+                    borderRadius: 2,
+                    color: (theme) => theme.app?.text ?? "#fff",
+                    "& input": {
+                      paddingLeft: 1.5,
+                    },
                   },
                 }}
-                InputProps={{
+                InputLabelProps={{
                   sx: {
-                    color: (theme) => theme.app.text,
+                    color: (theme) => theme.app?.text ?? "#fff",
                   },
                 }}
               />
@@ -109,18 +137,30 @@ export const SignUpPage = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                placeholder="Enter Email Address"
                 name="email"
                 autoComplete="email"
-                variant="filled"
-                InputLabelProps={{
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Email
+                        sx={{ color: (theme) => theme.app?.text ?? "#fff" }}
+                      />
+                    </InputAdornment>
+                  ),
                   sx: {
-                    color: (theme) => theme.app.text,
+                    backgroundColor: "rgba(255,255,255,0.05)",
+                    borderRadius: 2,
+                    color: (theme) => theme.app?.text ?? "#fff",
+                    "& input": {
+                      paddingLeft: 1.5,
+                    },
                   },
                 }}
-                InputProps={{
+                InputLabelProps={{
                   sx: {
-                    color: (theme) => theme.app.text,
+                    color: (theme) => theme.app?.text ?? "#fff",
                   },
                 }}
               />
@@ -130,18 +170,30 @@ export const SignUpPage = () => {
                 required
                 fullWidth
                 id="username"
-                label="Username"
+                placeholder="Enter Username"
                 name="username"
                 autoComplete="username"
-                variant="filled"
-                InputLabelProps={{
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AccountCircle
+                        sx={{ color: (theme) => theme.app?.text ?? "#fff" }}
+                      />
+                    </InputAdornment>
+                  ),
                   sx: {
-                    color: (theme) => theme.app.text,
+                    backgroundColor: "rgba(255,255,255,0.05)",
+                    borderRadius: 2,
+                    color: (theme) => theme.app?.text ?? "#fff",
+                    "& input": {
+                      paddingLeft: 1.5,
+                    },
                   },
                 }}
-                InputProps={{
+                InputLabelProps={{
                   sx: {
-                    color: (theme) => theme.app.text,
+                    color: (theme) => theme.app?.text ?? "#fff",
                   },
                 }}
               />
@@ -151,19 +203,31 @@ export const SignUpPage = () => {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                placeholder="Enter Password"
                 type="password"
                 id="password"
                 autoComplete="new-password"
-                variant="filled"
-                InputLabelProps={{
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Lock
+                        sx={{ color: (theme) => theme.app?.text ?? "#fff" }}
+                      />
+                    </InputAdornment>
+                  ),
                   sx: {
-                    color: (theme) => theme.app.text,
+                    backgroundColor: "rgba(255,255,255,0.05)",
+                    borderRadius: 2,
+                    color: (theme) => theme.app?.text ?? "#fff",
+                    "& input": {
+                      paddingLeft: 1.5,
+                    },
                   },
                 }}
-                InputProps={{
+                InputLabelProps={{
                   sx: {
-                    color: (theme) => theme.app.text,
+                    color: (theme) => theme.app?.text ?? "#fff",
                   },
                 }}
               />
@@ -173,16 +237,30 @@ export const SignUpPage = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{
+              mt: 3,
+              mb: 2,
+              py: 1.5,
+              borderRadius: 2,
+              fontWeight: "bold",
+            }}
           >
-            Sign Up
+            {signUpApiResponse === "loading" ? (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: "white",
+                }}
+              />
+            ) : (
+              "Sign Up"
+            )}
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link
-                href="#"
                 onClick={handleSignInClick}
-                sx={{ color: (theme) => theme.app.text }}
+                sx={{ color: (theme) => theme.app?.text ?? "#fff" }}
                 variant="body2"
               >
                 Already have an account? Sign in
@@ -191,6 +269,6 @@ export const SignUpPage = () => {
           </Grid>
         </Box>
       </Box>
-    </Container>
+    </Paper>
   );
 };

@@ -3,4 +3,5 @@ export interface UploadVideoRequest {
   thumbnail?: File;
   title?: string;
   description?: string;
+  userId?: string;
 }

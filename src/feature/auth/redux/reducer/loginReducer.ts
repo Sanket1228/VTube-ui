@@ -29,9 +29,16 @@ export const loginSlice = createSlice({
       state.api.data = undefined;
       state.api.error = action.payload;
     },
+    logout(state) {
+      state.api.apiState = "initial";
+      state.api.data = undefined;
+      state.api.error = undefined;
+      localStorage.clear();
+    },
   },
 });
 
-export const { loginRequest, loginSuccess, loginFailed } = loginSlice.actions;
+export const { loginRequest, loginSuccess, loginFailed, logout } =
+  loginSlice.actions;
 
 export const loginReducer = loginSlice.reducer;

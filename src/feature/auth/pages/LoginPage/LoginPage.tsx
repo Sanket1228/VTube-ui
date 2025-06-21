@@ -1,11 +1,14 @@
-import { LockOutlined } from "@mui/icons-material";
+import { Email, Lock, LockOutlined } from "@mui/icons-material";
 import {
+  Alert,
   Avatar,
   Box,
   Button,
-  Container,
+  CircularProgress,
   Grid,
+  InputAdornment,
   Link,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -23,6 +26,14 @@ export const LoginPage = () => {
 
   // auth - login - api - data - acccess
   const userData = useSelector((state: RootState) => state.auth.login.api.data);
+
+  const loginApiState = useSelector(
+    (state: RootState) => state.auth.login.api.apiState
+  );
+
+  const loginError = useSelector(
+    (state: RootState) => state.auth.login.api.error
+  );
 
   useEffect(() => {
     if (userData?.accessToken !== undefined) {
@@ -43,14 +54,14 @@ export const LoginPage = () => {
   const handleSignUpClick = () => navigate("/auth/signup");
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      style={{
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+    <Paper
+      elevation={6}
+      sx={{
+        padding: 4,
+        borderRadius: 4,
+        backgroundColor: "rgba(255, 255, 255, 0.05)",
+        backdropFilter: "blur(12px)",
+        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
       }}
     >
       <Box
@@ -66,50 +77,65 @@ export const LoginPage = () => {
         <Typography
           component="h1"
           variant="h5"
-          sx={{ color: (theme) => theme.app.text }}
+          sx={{ color: (theme) => theme.app?.text ?? "#fff" }}
         >
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
+          {loginError && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {loginError}
+            </Alert>
+          )}
           <TextField
-            margin="normal"
             required
             fullWidth
             id="email"
-            label="Email Address"
+            placeholder="Enter Email Id"
             name="email"
             autoComplete="email"
             autoFocus
-            variant="filled"
-            InputLabelProps={{
-              sx: {
-                color: (theme) => theme.app.text,
-              },
-            }}
+            variant="outlined"
+            margin="normal"
             InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Email sx={{ color: (theme) => theme.app?.text ?? "#fff" }} />
+                </InputAdornment>
+              ),
               sx: {
-                color: (theme) => theme.app.text,
+                backgroundColor: "rgba(255,255,255,0.05)",
+                borderRadius: 2,
+                color: (theme) => theme.app?.text ?? "#fff",
+                "& input": {
+                  paddingLeft: 1.5, // This adds spacing between icon and text
+                },
               },
             }}
           />
           <TextField
-            margin="normal"
             required
             fullWidth
             name="password"
-            label="Password"
+            placeholder="Enter Password"
             type="password"
             id="password"
             autoComplete="current-password"
-            variant="filled"
-            InputLabelProps={{
-              sx: {
-                color: (theme) => theme.app.text,
-              },
-            }}
+            variant="outlined"
+            margin="normal"
             InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Lock sx={{ color: (theme) => theme.app?.text ?? "#fff" }} />
+                </InputAdornment>
+              ),
               sx: {
-                color: (theme) => theme.app.text,
+                backgroundColor: "rgba(255,255,255,0.05)",
+                borderRadius: 2,
+                color: (theme) => theme.app?.text ?? "#fff",
+                "& input": {
+                  paddingLeft: 1.5, // This adds spacing between icon and text
+                },
               },
             }}
           />
@@ -117,26 +143,31 @@ export const LoginPage = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{
+              mt: 3,
+              mb: 2,
+              py: 1.5,
+              borderRadius: 2,
+              fontWeight: "bold",
+            }}
           >
-            Sign In
+            {loginApiState === "loading" ? (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: "white",
+                }}
+              />
+            ) : (
+              "Sign In"
+            )}
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link
-                href="#"
-                variant="body2"
-                sx={{ color: (theme) => theme.app.text }}
-              >
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
               <Link
-                href="#"
                 onClick={handleSignUpClick}
                 variant="body2"
-                sx={{ color: (theme) => theme.app.text }}
+                sx={{ color: (theme) => theme.app?.text ?? "#fff" }}
               >
                 {"Don't have an account? Sign Up"}
               </Link>
@@ -144,6 +175,6 @@ export const LoginPage = () => {
           </Grid>
         </Box>
       </Box>
-    </Container>
+    </Paper>
   );
 };

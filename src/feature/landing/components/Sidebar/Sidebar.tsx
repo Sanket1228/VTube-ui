@@ -1,5 +1,5 @@
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { Divider, IconButton, List, Toolbar } from "@mui/material";
+import { Divider, IconButton, Toolbar } from "@mui/material";
 import { Drawer } from "./Sidebar.styled";
 import { MainMenuItems } from "./components/ListItems";
 
@@ -24,7 +24,7 @@ export const Sidebar = ({ open, toggleDrawer }: SidebarProps) => {
         </IconButton>
       </Toolbar>
       <Divider />
-      <List component="nav">{MainMenuItems()}</List>
+      <MainMenuItems />
     </Drawer>
   );
 };

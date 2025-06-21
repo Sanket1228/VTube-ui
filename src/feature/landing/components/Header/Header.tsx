@@ -35,7 +35,7 @@ export const Header = ({ open, toggleDrawer }: HeaderProps) => {
           noWrap
           sx={{ flexGrow: 1 }}
         >
-          Dashboard
+          Home
         </Typography>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
