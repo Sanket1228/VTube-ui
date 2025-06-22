@@ -3,5 +3,5 @@ import { VideosData } from "../../api/AllVideos/VideosData";
 
 export type FetchVideoState = {
   ui: {};
-  api: ApiState<VideosData>;
+  api: { all: ApiState<VideosData>; user: ApiState<VideosData> };
 };

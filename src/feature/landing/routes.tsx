@@ -1,5 +1,6 @@
 import { FeatureRouteObject } from "../../common/types/FeatureRouteObject";
 import { HomePage, LandingPage, UploaderPage } from "./pages";
+import { OwnVideosPage } from "./pages/OwnVideosPage";
 
 const routes: FeatureRouteObject[] = [
   {
@@ -18,6 +19,10 @@ const routes: FeatureRouteObject[] = [
       {
         path: "/upload",
         element: <UploaderPage />,
+      },
+      {
+        path: "/my-videos",
+        element: <OwnVideosPage />,
       },
     ],
   },

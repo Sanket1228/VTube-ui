@@ -41,6 +41,12 @@ export const MainMenuItems = () => {
             </ListItemIcon>
             <ListItemText primary="Upload Video" />
           </ListItemButton>
+          <ListItemButton onClick={() => navigate("/my-videos")}>
+            <ListItemIcon>
+              <LayersIcon />
+            </ListItemIcon>
+            <ListItemText primary="My Videos" />
+          </ListItemButton>
         </List>
       </Box>
 

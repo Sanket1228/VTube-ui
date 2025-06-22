@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../redux";
-import { fetchAllVideos } from "../../redux/actions/fetchVideosAction";
+import { fetchUserVideos } from "../../redux/actions/fetchVideosAction";
 import { LandingDispatch } from "../../redux/types/LandingDispatch";
 
 const bull = (
@@ -16,15 +16,15 @@ const bull = (
   </Box>
 );
 
-export const HomePage = () => {
+export const OwnVideosPage = () => {
   const dispatch = useDispatch<LandingDispatch>();
 
   const videos = useSelector(
-    (state: RootState) => state.landing.fetchVideos.api.all.data?.videos
+    (state: RootState) => state.landing.fetchVideos.api.user.data?.videos
   );
 
   useEffect(() => {
-    dispatch(fetchAllVideos());
+    dispatch(fetchUserVideos());
   }, []);
 
   return (
