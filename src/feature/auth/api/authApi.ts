@@ -8,13 +8,18 @@ import { SignUpResponse } from "./types/SignUp/SignUpResponse";
 export function signUp(
   data: SignUpRequest
 ): Promise<ApiResponse<SignUpResponse, any>> {
-  const url = `http://localhost:8000/api/v1/users/register`;
+  const url = `${process.env.REACT_APP_DEPLOYED_URL}/users/register`;
   return client.post<SignUpRequest, IServerResponse<SignUpResponse>>(url, data);
 }
 
 export function login(
   data: LoginRequest
 ): Promise<ApiResponse<LoginData, any>> {
-  const url = `http://localhost:8000/api/v1/users/login`;
-  return client.post<LoginRequest, IServerResponse<LoginData>>(url, data);
+  const url = `${process.env.REACT_APP_DEPLOYED_URL}/users/login`;
+  return client.post<LoginRequest, IServerResponse<LoginData>>(url, data, {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }

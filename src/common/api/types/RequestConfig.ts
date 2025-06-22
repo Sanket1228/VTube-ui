@@ -13,4 +13,5 @@ export type RequestConfig = {
   onUploadProgress?: (progressEvent: AxiosProgressEvent) => void;
   onDownloadProgress?: (progressEvent: AxiosProgressEvent) => void;
   maxContentLength?: number;
+  withCredentials?: boolean;
 };

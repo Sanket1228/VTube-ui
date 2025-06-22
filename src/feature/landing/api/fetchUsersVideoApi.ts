@@ -4,6 +4,6 @@ import { createCorsConfig } from "../../../common/api/utils/remoteCalls";
 import { VideosData } from "./UserVideos/VideosData";
 
 export function fetchUsersVideos(): Promise<ApiResponse<VideosData, any>> {
-  const url = `http://localhost:8000/api/v1/video/mine`;
+  const url = `${process.env.REACT_APP_DEPLOYED_URL}/video/mine`;
   return client.get<IServerResponse<VideosData>>(url, createCorsConfig());
 }
